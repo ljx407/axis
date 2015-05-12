@@ -1,9 +1,6 @@
 package test;
 
-import com.chain.Chain1Handler;
-import com.chain.Chain2Handler;
-import com.chain.ChainHandler;
-import com.chain.ChainService;
+import com.file.FileService;
 
 public class A {
 	public static void main(String[] args) {
@@ -11,9 +8,12 @@ public class A {
 //		new OrderService();
 //		new LogHandler();
 //		new AuthenticatedHandler();
-		new ChainService();
-		new Chain1Handler();
-		new Chain2Handler();
-		new ChainHandler();
+//		new ChainService();
+//		new Chain1Handler();
+//		new Chain2Handler();
+//		new ChainHandler();
+		new FileService();
 	}
+	
+	
 }
