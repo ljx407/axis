@@ -35,8 +35,10 @@ public class FileService {
 			byte[] read = new byte[1024];
 			int n = 0;
 			while ((n = inputStream.read(read)) != -1) {
+				log.info(n);
 				fileOutputStream.write(read, 0, n);
 			}
+			log.info("fileOutput over ");
 			fileOutputStream.flush();
 			fileOutputStream.close();
 			inputStream.close();
@@ -74,7 +76,8 @@ public class FileService {
 		}
 		return dataHandlers;
 	}
-
+	
+	
 	@Test
 	public void testUp() {
 		File file = new File("G:/a.txt");
@@ -82,40 +85,29 @@ public class FileService {
 		DataHandler dataHandler = new DataHandler(fileDataSource);
 		uploadFile("a.txt", dataHandler);
 	}
-
+	/*
 	@Test
 	public void testDown() {
 		try {
 			String dwDir = "G:/downRepository";
-			//File dwRepo = new File("G:/downRepository");
 			DataHandler[] downloadFile = downloadFile("a.txt");
 			log.info(downloadFile.length);
-//			for (int i = 0; i < downloadFile.length; i++) {
-//				DataHandler dataHander = downloadFile[i];
-//				InputStream inputStream = dataHander.getInputStream();
-//				FileOutputStream fileOutputStream = new FileOutputStream(new File(dwDir,dataHander.getDataSource().getName()));
-//				byte[] readBuffer = new byte[1024];
-//				for(int n=inputStream.read(readBuffer) ; n > 0 ;) {
-//					fileOutputStream.write(readBuffer, 0, n);
-//				}
-//				fileOutputStream.flush();
-//				fileOutputStream.close();
-//				inputStream.close();
-//			}
-			DataHandler dataHandler = downloadFile[0];
-			InputStream inputStream = dataHandler.getDataSource().getInputStream();
-			FileOutputStream fileOutputStream = new FileOutputStream(new File(dwDir,"a.txt"));
-			byte[] readBuffer = new byte[1024];
-			int n = 0;
-			while((n=inputStream.read(readBuffer)) != -1) {
-				fileOutputStream.write(readBuffer, 0, n);
+			for (int i = 0; i < downloadFile.length; i++) {
+				DataHandler dataHandler = downloadFile[i];
+				InputStream inputStream = dataHandler.getDataSource().getInputStream();
+				FileOutputStream fileOutputStream = new FileOutputStream(new File(dwDir,"a.txt"));
+				byte[] readBuffer = new byte[1024];
+				int n = 0;
+				while((n=inputStream.read(readBuffer)) != -1) {
+					fileOutputStream.write(readBuffer, 0, n);
+				}
+				fileOutputStream.flush();
+				fileOutputStream.close();
+				inputStream.close();	
 			}
-			fileOutputStream.flush();
-			fileOutputStream.close();
-			inputStream.close();			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	*/
 }
