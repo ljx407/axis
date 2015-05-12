@@ -33,7 +33,8 @@ public class FileService {
 			FileOutputStream fileOutputStream = new FileOutputStream(upFile, true);
 			InputStream inputStream = dataHandler.getInputStream();
 			byte[] read = new byte[1024];
-			for (int n = inputStream.read(read); n != -1;) {
+			int n = 0;
+			while ((n = inputStream.read(read)) != -1) {
 				fileOutputStream.write(read, 0, n);
 			}
 			fileOutputStream.flush();
@@ -89,19 +90,31 @@ public class FileService {
 			//File dwRepo = new File("G:/downRepository");
 			DataHandler[] downloadFile = downloadFile("a.txt");
 			log.info(downloadFile.length);
-			for (int i = 0; i < downloadFile.length; i++) {
-				DataHandler dataHander = downloadFile[i];
-				InputStream inputStream = dataHander.getInputStream();
-				FileOutputStream fileOutputStream = new FileOutputStream(new File(dwDir,dataHander.getDataSource().getName()));
-				byte[] readBuffer = new byte[1024];
-				for(int n=inputStream.read(readBuffer) ; n > 0 ;) {
-					fileOutputStream.write(readBuffer, 0, n);
-				}
-				fileOutputStream.flush();
-				fileOutputStream.close();
-				inputStream.close();
+//			for (int i = 0; i < downloadFile.length; i++) {
+//				DataHandler dataHander = downloadFile[i];
+//				InputStream inputStream = dataHander.getInputStream();
+//				FileOutputStream fileOutputStream = new FileOutputStream(new File(dwDir,dataHander.getDataSource().getName()));
+//				byte[] readBuffer = new byte[1024];
+//				for(int n=inputStream.read(readBuffer) ; n > 0 ;) {
+//					fileOutputStream.write(readBuffer, 0, n);
+//				}
+//				fileOutputStream.flush();
+//				fileOutputStream.close();
+//				inputStream.close();
+//			}
+			DataHandler dataHandler = downloadFile[0];
+			InputStream inputStream = dataHandler.getDataSource().getInputStream();
+			FileOutputStream fileOutputStream = new FileOutputStream(new File(dwDir,"a.txt"));
+			byte[] readBuffer = new byte[1024];
+			int n = 0;
+			while((n=inputStream.read(readBuffer)) != -1) {
+				fileOutputStream.write(readBuffer, 0, n);
 			}
-		} catch (IOException e) {
+			fileOutputStream.flush();
+			fileOutputStream.close();
+			inputStream.close();			
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
